@@ -7,8 +7,8 @@ window.onload = function() {
 document.getElementById("submit").addEventListener("click", function() {
   data["list1"] = document.getElementById("flist").value;
   data["list2"] = document.getElementById("llist").value;
-
-  document.getElementById("submit").setAttribute("disabled", "disabled");
+  data["type"] = document.getElementById("datatype").value.toUpperCase();
+  
   sendlists(data);
 });
 };
