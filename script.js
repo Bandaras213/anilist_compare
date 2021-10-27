@@ -3,6 +3,7 @@ var tabledub = `<table class="tb-double"><thead><tr><th class="tb-0"></th><th></
 var tablel1 = `<table class="tb-l1" style="display: none"><thead><tr><th class="tb-0"></th></tr><tr><th>Name</th><th>score</th><th>notes</th</thead><tbody></tbody></table>`
 var tablel2 = `<table class="tb-l2" style="display: none"><thead><tr><th class="tb-0"></th></tr><tr><th>Name</th><th>score</th><th>notes</th></thead><tbody></tbody></table>`
 
+window.onload = function() {
 document.getElementById("submit").addEventListener("click", function() {
   data["list1"] = document.getElementById("flist").value;
   data["list2"] = document.getElementById("llist").value;
@@ -10,6 +11,7 @@ document.getElementById("submit").addEventListener("click", function() {
   document.getElementById("submit").setAttribute("disabled", "disabled");
   sendlists(data);
 });
+};
 
 function buildhtml(response, d) {
   let button = `<button style="display: block" onclick="hidetable('tb-double')">Click Me</button>`
