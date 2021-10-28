@@ -8,6 +8,7 @@ document.getElementById("submit").addEventListener("click", function() {
   data["list1"] = document.getElementById("flist").value;
   data["list2"] = document.getElementById("llist").value;
   data["type"] = document.getElementById("datatype").value.toUpperCase();
+  document.getElementById("submit").disabled = true;
   
   sendlists(data);
 });
@@ -15,6 +16,7 @@ document.getElementById("submit").addEventListener("click", function() {
 
 function buildhtml(response, d) {
   let button = `<button style="display: block" onclick="hidetable('tb-double')">Click Me</button>`
+  let revertbtn = `<button id="revbtn" style="display: block" onclick="revert()">New Search</button>`
 
   let mbody = document.getElementsByClassName("mainbody")[0];
   mbody.insertAdjacentHTML('beforeend', tabledub);
@@ -25,6 +27,7 @@ function buildhtml(response, d) {
   let tablelist2 = mbody.getElementsByClassName("tb-l2")[0];
 
   if (makehtml(table, tablelist1, tablelist2, response, d) == "OK") {
+    document.getElementsByClassName("header")[0].getElementsByTagName("h1")[0].insertAdjacentHTML('afterbegin', revertbtn);
     mbody.insertAdjacentHTML('afterbegin', button)
     button = `<button style="display: block" onclick="hidetable('tb-l1')">Click Me</button>`
     tablelist1.insertAdjacentHTML('beforebegin', button)
@@ -56,7 +59,6 @@ async function sendlists(d) {
 }
 
 function makehtml(table, t1, t2, res, d) {
-
   let status;
 
   try {
@@ -181,4 +183,17 @@ function hidetable(name) {
   } else {
     x.style.display = "none";
   }
+}
+
+function revert() {
+  let mbody = document.getElementsByClassName("mainbody")[0];
+  document.getElementById("revbtn").remove();
+  mbody.querySelectorAll('button').forEach(e => e.remove());
+  mbody.getElementsByClassName("tb-double")[0].remove();
+  mbody.getElementsByClassName("tb-l1")[0].remove();
+  mbody.getElementsByClassName("tb-l2")[0].remove();
+  document.getElementById("flist").value = "";
+  document.getElementById("llist").value = "";
+  mbody.getElementsByClassName("inputs")[0].style.display = "block";
+  document.getElementById("submit").disabled = false;
 }
