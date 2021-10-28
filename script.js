@@ -113,6 +113,11 @@ function makehtml(table, t1, t2, res, d) {
     let tbody = t1.getElementsByTagName("tbody")[0]
     t1.getElementsByClassName("tb-0")[0].innerText = d.list1;
     for (let i in res.list1.data.MediaListCollection.lists) {
+      let th = document.createElement("th");
+      let tr1 = document.createElement("tr");
+      th.innerText = res.list1.data.MediaListCollection.lists[i].name;
+      tr1.appendChild(th);
+      tbody.appendChild(tr1);
       for (let a in res.list1.data.MediaListCollection.lists[i].entries) {
         let tr = document.createElement("tr");
         let td = document.createElement("td");
@@ -145,6 +150,11 @@ function makehtml(table, t1, t2, res, d) {
     let tbody = t2.getElementsByTagName("tbody")[0]
     t2.getElementsByClassName("tb-0")[0].innerText = d.list2;
     for (let i in res.list2.data.MediaListCollection.lists) {
+      let th = document.createElement("th");
+      let tr1 = document.createElement("tr");
+      th.innerText = res.list2.data.MediaListCollection.lists[i].name;
+      tr1.appendChild(th);
+      tbody.appendChild(tr1);
       for (let a in res.list2.data.MediaListCollection.lists[i].entries) {
         let tr = document.createElement("tr");
         let td = document.createElement("td");
