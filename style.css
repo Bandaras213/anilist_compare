@@ -25,3 +25,15 @@
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+
+h1, p, label, option, input, select, th, td, button {
+  color: white;
+}
+
+body {
+  background-color: #161b22;
+}
+
+input, select, button {
+  background-color: #484f58;
+}
