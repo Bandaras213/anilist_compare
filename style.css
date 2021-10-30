@@ -37,3 +37,7 @@ body {
 input, select, button {
   background-color: #484f58;
 }
+
+input:disabled {
+  background-color: #23262b;
+}

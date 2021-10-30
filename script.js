@@ -14,6 +14,27 @@ document.getElementById("submit").addEventListener("click", function() {
 });
 };
 
+async function sendlists(d) {
+  var http = new XMLHttpRequest();
+  var url = "https://LoathsomePersonalSort.bandaras213.repl.co/request";
+  var params = JSON.stringify(d);
+
+  http.open("POST", url, true);
+  http.setRequestHeader("Content-type", "application/json");
+
+  http.onreadystatechange = function() {
+    if (http.readyState == 4 && http.status == 200) {
+      if (JSON.parse(http.responseText).name == "Username Error") {
+        alert(JSON.parse(http.responseText).message + " Username: " + JSON.parse(http.responseText).cause);
+        document.getElementById("submit").disabled = false;
+      } else {
+        buildhtml(JSON.parse(http.responseText), d);
+      }
+    }
+  }
+  http.send(params);
+}
+
 function buildhtml(response, d) {
   let button = `<button style="display: block" onclick="hidetable('tb-double')">Click Me</button>`
   let revertbtn = `<button id="revbtn" style="display: block" onclick="revert()">New Search</button>`
@@ -35,27 +56,6 @@ function buildhtml(response, d) {
     tablelist2.insertAdjacentHTML('beforebegin', button)
     mbody.getElementsByClassName("inputs")[0].style.display = "none";
   }
-}
-
-async function sendlists(d) {
-  var http = new XMLHttpRequest();
-  var url = "https://LoathsomePersonalSort.bandaras213.repl.co/request";
-  var params = JSON.stringify(d);
-
-  http.open("POST", url, true);
-  http.setRequestHeader("Content-type", "application/json");
-
-  http.onreadystatechange = function() {
-    if (http.readyState == 4 && http.status == 200) {
-      if (JSON.parse(http.responseText).name == "Username Error") {
-        console.log(JSON.parse(http.responseText).message)
-        console.log(JSON.parse(http.responseText).cause)
-      } else {
-        buildhtml(JSON.parse(http.responseText), d);
-      }
-    }
-  }
-  http.send(params);
 }
 
 function makehtml(table, t1, t2, res, d) {
